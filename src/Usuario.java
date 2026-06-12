@@ -21,4 +21,9 @@ public class Usuario {
     public String getSenha() {
         return senha;
     }
+
+    // transforma o usuário em texto para salvar no arquivo
+    public String toFileString() {
+        return nome + ";" + email + ";" + senha;
+    }
 }

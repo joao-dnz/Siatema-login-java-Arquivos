@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Main {
 
@@ -21,19 +23,27 @@ public class Main {
             scanner.nextLine();
 
             switch (opcao) {
-                case 1:
-                    System.out.print("Nome: ");
-                    String nome = scanner.nextLine();
+         case 1:
+    System.out.print("Nome: ");
+    String nome = scanner.nextLine();
 
-                    System.out.print("Email: ");
-                    String email = scanner.nextLine();
+    System.out.print("Email: ");
+    String email = scanner.nextLine();
 
-                    System.out.print("Senha: ");
-                    String senha = scanner.nextLine();
+    System.out.print("Senha: ");
+    String senha = scanner.nextLine();
 
-                    usuarios.add(new Usuario(nome, email, senha));
-                    System.out.println("Usuário cadastrado com sucesso!");
-                    break;
+    Usuario novoUsuario = new Usuario(nome, email, senha);
+    usuarios.add(novoUsuario);
+
+    // salvar no arquivo
+    try (FileWriter writer = new FileWriter("dados/usuarios.txt", true)) {
+        writer.write(novoUsuario.toFileString() + System.lineSeparator());
+        System.out.println("Usuário cadastrado e salvo com sucesso!");
+    } catch (IOException e) {
+        System.out.println("Erro ao salvar usuário no arquivo.");
+    }
+    break;
 
                 case 2:
                     System.out.println("Login será implementado");
