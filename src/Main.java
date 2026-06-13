@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 
 public class Main {
 
@@ -9,8 +12,30 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         ArrayList<Usuario> usuarios = new ArrayList<>();
+       
+// carregar usuarios do arquivo
+try (BufferedReader reader = new BufferedReader(new FileReader("dados/usuarios.txt"))) {
+    String linha;
+
+    while ((linha = reader.readLine()) != null) {
+        String[] partes = linha.split(";");
+
+        if (partes.length == 3) {
+            String nome = partes[0];
+            String email = partes[1];
+            String senha = partes[2];
+
+            Usuario u = new Usuario(nome, email, senha);
+            usuarios.add(u);
+        }
+    }
+} catch (Exception e) {
+    System.out.println("Arquivo de usuários ainda não existe ou está vazio.");
+}
         int opcao;
 
+
+        
         while (true) {
             System.out.println("\n==== SISTEMA LOGIN ====");
             System.out.println("1 - Cadastrar usuário");
