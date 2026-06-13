@@ -48,7 +48,7 @@ try (BufferedReader reader = new BufferedReader(new FileReader("dados/usuarios.t
             scanner.nextLine();
 
             switch (opcao) {
-         case 1:
+          case 1:
     System.out.print("Nome: ");
     String nome = scanner.nextLine();
 
@@ -71,18 +71,28 @@ try (BufferedReader reader = new BufferedReader(new FileReader("dados/usuarios.t
     break;
 
                 case 2:
-                    System.out.println("Login será implementado");
-                    break;
+                    System.out.print ("Email:");
+                    String emailLogin = scanner.nextLine();
 
-                case 3:
-                    if (usuarios.isEmpty()) {
-                        System.out.println("Nenhum usuário cadastrado");
-                    } else {
-                        for (Usuario u : usuarios) {
-                            System.out.println(u.getNome() + " | " + u.getEmail());
-                        }
+                    System.out.print("Senha:");
+                    String senhalogin = scanner.nextLine();
+
+                    boolean encontrado = false;
+
+                    for (Usuario u:  usuarios){
+                        if (u.getEmail().equals(emailLogin) &&
+                            u.getSenha().equals(senhalogin)){
+
+                                System.out.print("Login finalizado com sucesso,");
+                                System.out.print("Bem vindo,"+ u.getNome());
+                                encontrado = true;
+                                break;
+                            }
                     }
-                    break;
+                    if (!encontrado){
+                        System.out.println("Email ou senha invalidos");
+                    }
+                
 
                 case 4:
                     System.out.println("Saindo do sistema...");
