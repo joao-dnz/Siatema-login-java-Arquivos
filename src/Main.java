@@ -54,6 +54,20 @@ try (BufferedReader reader = new BufferedReader(new FileReader("dados/usuarios.t
 
     System.out.print("Email: ");
     String email = scanner.nextLine();
+    
+    boolean emailExiste = false;
+    for (Usuario u: usuarios){
+        if (u.getEmail().equals(email)){
+            emailExiste = true;
+            break;
+        }
+    }
+
+    if (emailExiste) {
+        System.err.println("Email foi cadastrado!");
+        break;
+    }
+
 
     System.out.print("Senha: ");
     String senha = scanner.nextLine();
@@ -82,9 +96,7 @@ try (BufferedReader reader = new BufferedReader(new FileReader("dados/usuarios.t
                     for (Usuario u:  usuarios){
                         if (u.getEmail().equals(emailLogin) &&
                             u.getSenha().equals(senhalogin)){
-
-                                System.out.print("Login finalizado com sucesso,");
-                                System.out.print("Bem vindo,"+ u.getNome());
+                                System.out.println("Login finalizado com sucesso, Bem vindo, " + u.getNome());
                                 encontrado = true;
                                 break;
                             }
